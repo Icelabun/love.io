@@ -26,40 +26,53 @@ function createStars() {
     }
 }
 
-// Create floating hearts
+// Create floating hearts with better animation
 function createHeart() {
     const heart = document.createElement('div');
     heart.className = 'heart';
-    heart.innerHTML = '❤️';
+    heart.innerHTML = ['❤️', '💖', '💝', '💕', '💗'][Math.floor(Math.random() * 5)];
     
-    // Random position and size
     const x = Math.random() * window.innerWidth;
     const size = Math.random() * 30 + 20;
+    const duration = Math.random() * 2 + 3;
+    const sway = Math.random() * 50 - 25;
     
     heart.style.left = `${x}px`;
     heart.style.fontSize = `${size}px`;
+    heart.style.animation = `float ${duration}s ease-in-out infinite`;
+    heart.style.transform = `translateX(${sway}px)`;
     
     document.body.appendChild(heart);
     
-    // Remove heart after animation
     setTimeout(() => {
         heart.remove();
-    }, 4000);
+    }, duration * 1000);
 }
 
-// Create sparkle effect
+// Enhanced sparkle effect
 function createSparkle(e) {
-    const sparkle = document.createElement('div');
-    sparkle.className = 'sparkle';
-    
-    sparkle.style.left = `${e.pageX}px`;
-    sparkle.style.top = `${e.pageY}px`;
-    
-    document.body.appendChild(sparkle);
-    
-    setTimeout(() => {
-        sparkle.remove();
-    }, 1000);
+    const colors = ['#ff69b4', '#ff1493', '#ffb6c1', '#ffc0cb'];
+    for (let i = 0; i < 5; i++) {
+        const sparkle = document.createElement('div');
+        sparkle.className = 'sparkle';
+        
+        const size = Math.random() * 10 + 5;
+        const angle = Math.random() * 360;
+        const distance = Math.random() * 50 + 20;
+        
+        sparkle.style.left = `${e.pageX}px`;
+        sparkle.style.top = `${e.pageY}px`;
+        sparkle.style.width = `${size}px`;
+        sparkle.style.height = `${size}px`;
+        sparkle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        sparkle.style.transform = `rotate(${angle}deg) translate(${distance}px)`;
+        
+        document.body.appendChild(sparkle);
+        
+        setTimeout(() => {
+            sparkle.remove();
+        }, 1000);
+    }
 }
 
 // Interactive text effects
@@ -76,6 +89,19 @@ function addTextInteractivity() {
         p.addEventListener('mouseout', () => {
             p.style.transform = 'scale(1)';
         });
+    });
+}
+
+// Add hover effect to title
+function addTitleEffect() {
+    const title = document.querySelector('h1');
+    title.addEventListener('mouseover', (e) => {
+        createSparkle(e);
+        title.style.transform = 'scale(1.1) rotate(2deg)';
+    });
+    
+    title.addEventListener('mouseout', () => {
+        title.style.transform = 'scale(1) rotate(0deg)';
     });
 }
 
@@ -155,11 +181,14 @@ function changeLetter() {
 // Initialize everything
 document.addEventListener('DOMContentLoaded', () => {
     createStars();
-    setInterval(createHeart, 1000);
+    setInterval(createHeart, 800);
     addTextInteractivity();
-    
-    // Add mousemove sparkle effect
-    document.addEventListener('mousemove', createSparkle);
+    addTitleEffect();
+    document.addEventListener('mousemove', (e) => {
+        if (Math.random() < 0.1) {
+            createSparkle(e);
+        }
+    });
     
     // Add click effect
     document.addEventListener('click', (e) => {

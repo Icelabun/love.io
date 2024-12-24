@@ -42,16 +42,17 @@ body {
     z-index: 1;
     backdrop-filter: blur(10px);
     transform-style: preserve-3d;
-    animation: container-float 6s ease-in-out infinite;
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    animation: container-float 8s ease-in-out infinite;
+    border: 2px solid rgba(255, 192, 203, 0.4);
     max-width: 600px;
     width: 90%;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.5s ease;
 }
 
 .container:hover {
-    transform: scale(1.02) translateY(-10px);
-    box-shadow: 0 0 50px rgba(255, 0, 150, 0.5);
+    transform: scale(1.03) translateY(-15px) rotateX(5deg);
+    box-shadow: 0 0 60px rgba(255, 0, 150, 0.6);
+    border-color: rgba(255, 192, 203, 0.8);
 }
 
 @keyframes container-float {
@@ -106,22 +107,15 @@ p:nth-child(3) { animation-delay: 0.6s; }
 p:nth-child(4) { animation-delay: 0.9s; }
 
 .special-text {
-    font-size: 2rem;
+    font-size: 1.5rem;
     background: linear-gradient(45deg, #ff69b4, #ff1493, #ff69b4);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    animation: gradient-shift 3s linear infinite;
-    cursor: pointer;
-    transition: transform 0.3s ease;
+    animation: rainbow 3s ease infinite;
 }
 
-.special-text:hover {
-    transform: scale(1.1);
-    filter: brightness(1.2);
-}
-
-@keyframes gradient-shift {
+@keyframes rainbow {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
@@ -177,22 +171,23 @@ p:nth-child(4) { animation-delay: 0.9s; }
 
 .romantic-button {
     margin-top: 2rem;
-    padding: 1rem 2rem;
+    padding: 15px 30px;
     font-size: 1.2rem;
-    background: linear-gradient(45deg, #ff1493, #ff69b4);
+    background: linear-gradient(45deg, #ff69b4, #ff1493);
     border: none;
-    border-radius: 50px;
+    border-radius: 25px;
     color: white;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 0 15px rgba(255, 105, 180, 0.5);
+    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
     position: relative;
     overflow: hidden;
 }
 
 .romantic-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 25px rgba(255, 105, 180, 0.8);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(255, 105, 180, 0.6);
+    background: linear-gradient(45deg, #ff1493, #ff69b4);
 }
 
 .romantic-button:active {
@@ -206,23 +201,17 @@ p:nth-child(4) { animation-delay: 0.9s; }
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+    background: rgba(255, 255, 255, 0.2);
     transform: rotate(45deg);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.romantic-button:hover::before {
-    opacity: 0.3;
-    animation: shine 1.5s ease-in-out;
+    animation: shine 3s infinite;
 }
 
 @keyframes shine {
     0% {
-        transform: translateX(-100%) rotate(45deg);
+        transform: rotate(45deg) translateX(-100%);
     }
     100% {
-        transform: translateX(100%) rotate(45deg);
+        transform: rotate(45deg) translateX(100%);
     }
 }
 
